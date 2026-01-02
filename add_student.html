@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body onload="checkAuth()">
+    <div class="nav-bar">
+        <a href="dashboard.html">Home</a>
+        <a href="add_student.html">Add Data</a>
+        <a href="view_data.html">View Database</a>
+        <a href="#" onclick="logout()" style="color: red;">Logout</a>
+    </div>
+
+    <div class="container">
+        <h2>📝 Add Student Record</h2>
+        <input type="text" id="sName" placeholder="Student Name">
+        <input type="number" id="sRoll" placeholder="Roll Number">
+        <input type="number" id="sMarks" placeholder="Total Marks">
+        <button onclick="addStudent()">Save to Secure Database</button>
+    </div>
+</body>
+</html>
