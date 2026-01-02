@@ -1,90 +1,138 @@
-/* style.css */
+/* style.css - Ultra Modern Version */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #bc13fe;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 body {
-    font-family: 'Courier New', monospace; /* Hacker style font */
-    background-color: #0d1117;
-    color: #c9d1d9;
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #050505;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.2) 0%, transparent 50%),
+        linear-gradient(0deg, transparent 24%, rgba(0, 243, 255, .05) 25%, rgba(0, 243, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .05) 75%, rgba(0, 243, 255, .05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 243, 255, .05) 25%, rgba(0, 243, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .05) 75%, rgba(0, 243, 255, .05) 76%, transparent 77%, transparent);
+    background-size: 100% 100%, 50px 50px, 50px 50px;
+    color: #fff;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    user-select: none; /* Text selection disable (Anti-Copy) */
+    overflow-x: hidden;
+    user-select: none;
 }
 
 .container {
     width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background: #161b22;
-    border: 1px solid #30363d;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
-    margin-top: 50px;
-    border-radius: 10px;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px); /* Glass Effect */
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 60px rgba(188, 19, 254, 0.2);
+}
+
+/* Glowing Text */
 h1, h2 {
-    color: #58a6ff;
-    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+    letter-spacing: 2px;
     text-transform: uppercase;
 }
 
-input, button {
-    width: 100%;
-    padding: 10px;
+/* Futuristic Inputs */
+input {
+    width: 90%;
+    padding: 15px;
     margin: 10px 0;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    color: #fff;
-    font-family: 'Courier New', monospace;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 5px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    outline: none;
+    transition: 0.3s;
 }
 
+input:focus {
+    box-shadow: 0 0 15px var(--neon-blue);
+    background: rgba(0, 243, 255, 0.1);
+}
+
+/* Neon Button */
 button {
-    background-color: #238636;
-    cursor: pointer;
+    width: 95%;
+    padding: 15px;
+    margin-top: 20px;
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+    font-size: 18px;
     font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
 }
 
 button:hover {
-    background-color: #2ea043;
+    background: var(--neon-pink);
+    color: #fff;
+    box-shadow: 0 0 20px var(--neon-pink);
 }
 
+/* Table Design */
 table {
     width: 100%;
-    border-collapse: collapse;
     margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #30363d;
-    padding: 10px;
-    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
 
 th {
-    background-color: #21262d;
-    color: #58a6ff;
-}
-
-/* Security Alert Box */
-.security-alert {
-    color: red;
-    text-align: center;
-    display: none;
-    font-weight: bold;
-}
-
-.nav-bar {
-    text-align: center;
-    margin-bottom: 20px;
+    color: var(--neon-blue);
+    text-transform: uppercase;
     padding: 10px;
-    background: #21262d;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-left: 3px solid var(--neon-pink);
+}
+
+/* Navigation */
+.nav-bar {
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--neon-blue);
 }
 
 .nav-bar a {
-    color: #58a6ff;
-    margin: 0 15px;
+    color: #fff;
+    margin: 0 20px;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 18px;
+    position: relative;
 }
 
 .nav-bar a:hover {
-    color: #fff;
-    text-decoration: underline;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
 }
