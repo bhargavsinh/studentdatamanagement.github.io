@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body onload="checkAuth()">
+    <div class="nav-bar">
+        <a href="dashboard.html">Home</a>
+        <a href="add_student.html">Add Data</a>
+        <a href="view_data.html">View Database</a>
+        <a href="about.html">About</a>
+        <a href="#" onclick="logout()" style="color: red;">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>🎓 Admin Dashboard</h1>
+        <p>Welcome to the Secure Student Database Management System.</p>
+        <hr style="border-color: #30363d;">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+            <button onclick="window.location.href='add_student.html'">➕ Add New Student</button>
+            <button onclick="window.location.href='view_data.html'">📄 View Records</button>
+        </div>
+    </div>
+</body>
+</html>
