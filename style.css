@@ -1,0 +1,90 @@
+/* style.css */
+body {
+    font-family: 'Courier New', monospace; /* Hacker style font */
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* Text selection disable (Anti-Copy) */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #58a6ff;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+}
+
+button {
+    background-color: #238636;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #30363d;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #21262d;
+    color: #58a6ff;
+}
+
+/* Security Alert Box */
+.security-alert {
+    color: red;
+    text-align: center;
+    display: none;
+    font-weight: bold;
+}
+
+.nav-bar {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #21262d;
+}
+
+.nav-bar a {
+    color: #58a6ff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-bar a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
