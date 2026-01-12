@@ -1,27 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="gu">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Dashboard - SDMS</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
-<body onload="checkAuth()">
-    <div class="nav-bar">
-        <a href="dashboard.html">Home</a>
-        <a href="add_student.html">Add Data</a>
-        <a href="view_data.html">View Database</a>
-        <a href="about.html">About</a>
-        <a href="#" onclick="logout()" style="color: red;">Logout</a>
-    </div>
+<body onload="checkAuth(); updateDashboard();">
+
+    <header>
+        <div class="logo-area">
+            <img src="Untitled (30).png" class="logo-img" alt="Logo">
+            <h3>Mahisagar BCA College</h3>
+        </div>
+        <nav>
+            <a href="#" onclick="logout()">Logout</a>
+        </nav>
+    </header>
 
     <div class="container">
-        <h1>🎓 Admin Dashboard</h1>
-        <p>Welcome to the Secure Student Database Management System.</p>
-        <hr style="border-color: #30363d;">
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
-            <button onclick="window.location.href='add_student.html'">➕ Add New Student</button>
-            <button onclick="window.location.href='view_data.html'">📄 View Records</button>
+        <h1>Dashboard</h1>
+        <p>Welcome to Student Data Management System</p>
+
+        <div class="dash-grid">
+            <div class="card">
+                <h3>Total Students</h3>
+                <h1 id="totalCount" style="font-size: 4rem; color: var(--primary);">0</h1>
+            </div>
+            <div class="card">
+                <h3>Quick Action</h3>
+                <br>
+                <a href="add_student.html" class="btn btn-primary">Add New Student</a>
+            </div>
+            <div class="card">
+                <h3>View Records</h3>
+                <br>
+                <a href="view_data.html" class="btn btn-primary">View All Data</a>
+            </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
