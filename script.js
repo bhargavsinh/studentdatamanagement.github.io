@@ -1,119 +1,92 @@
-/* script.js - Ultra Modern AI Version */
-
-// 1. Voice Assistant Function (Jarvis Style)
-function speak(text) {
-    // Check if browser supports speech
-    if ('speechSynthesis' in window) {
-        let synth = window.speechSynthesis;
-        let utterance = new SpeechSynthesisUtterance(text);
-        
-        // Voice Settings
-        utterance.lang = "en-US"; // English Voice
-        utterance.volume = 1;     // Volume (0 to 1)
-        utterance.rate = 1;       // Speed
-        utterance.pitch = 1;      // Tone
-        
-        synth.speak(utterance);
-    } else {
-        console.log("Browser does not support text-to-speech");
-    }
-}
-
-// 2. Security: Right Click Disable
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-// 3. Login Logic with AI Voice
-function login() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    const alertBox = document.getElementById('alert');
-    const container = document.querySelector('.container');
-
-    // Hardcoded Credentials
-    if (user === "admin" && pass === "secure123") {
-        
-        // ✅ SUCCESS SCENARIO
-        alertBox.style.display = "none";
-        
-        // AI Speaks
-        speak("Access Granted. Welcome back, Commander Bhargav.");
-        
-        // Visual Effect (Green Glow)
-        container.style.boxShadow = "0 0 50px #00ff00";
-        
-        // Redirect after 2 seconds (so user can hear the voice)
-        setTimeout(() => {
-            sessionStorage.setItem("isLoggedIn", "true");
-            window.location.href = "dashboard.html";
-        }, 2000);
-
-    } else {
-        
-        // ❌ FAIL SCENARIO
-        // AI Speaks
-        speak("Access Denied. Security protocol initiated.");
-        
-        alertBox.style.display = "block";
-        alertBox.innerHTML = "🚫 SYSTEM ERROR: INVALID IDENTITY";
-        alertBox.style.color = "red";
-
-        // Visual Effect (Red Shake)
-        container.style.animation = "shake 0.5s";
-        container.style.boxShadow = "0 0 50px red";
-        
-        // Reset animation
-        setTimeout(() => {
-            container.style.animation = "";
-            container.style.boxShadow = ""; 
-        }, 500);
-    }
-}
-
-// 4. Check Authentication (For Dashboard Pages)
+// Check Login Status (Login Page સિવાયના બધા પેજ માટે)
 function checkAuth() {
-    if (sessionStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "index.html";
+    const user = localStorage.getItem('username');
+    if (!user && !window.location.href.includes('index.html')) {
+        window.location.href = 'index.html';
     }
 }
 
-// 5. Logout Function
-function logout() {
-    speak("Logging out. Have a nice day.");
-    setTimeout(() => {
-        sessionStorage.clear();
-        window.location.href = "index.html";
-    }, 1500);
+// Login Logic
+function login() {
+    const u = document.getElementById('user').value;
+    const p = document.getElementById('pass').value;
+    if (u === "admin" && p === "1234") {
+        localStorage.setItem('username', 'admin');
+        window.location.href = 'dashboard.html';
+    } else {
+        alert("ખોટું યુઝરનેમ અથવા પાસવર્ડ!");
+    }
 }
 
-// 6. Database Functions (Add & Load)
-function addStudent() {
-    let name = document.getElementById('sName').value;
-    let roll = document.getElementById('sRoll').value;
-    let marks = document.getElementById('sMarks').value;
+// Logout Logic
+function logout() {
+    localStorage.removeItem('username');
+    window.location.href = 'index.html';
+}
 
-    if(name === "" || roll === "" || marks === "") {
-        speak("Error. All fields are required.");
-        alert("All fields are required!");
+// Add Student Logic
+function addStudentData(event) {
+    event.preventDefault(); // ફોર્મ સબમિટ થતા રોકો
+    
+    // ડેટા ભેગો કરો
+    const student = {
+        id: Date.now(), // Unique ID
+        name: document.getElementById('name').value,
+        faculty: document.getElementById('faculty').value,
+        sem: document.getElementById('sem').value,
+        roll: document.getElementById('roll').value,
+        dob: document.getElementById('dob').value,
+        mobile: document.getElementById('mobile').value,
+        address: document.getElementById('address').value
+    };
+
+    // જૂનો ડેટા લાવો અને નવો ઉમેરો
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+    students.push(student);
+    localStorage.setItem('students', JSON.stringify(students));
+
+    alert("વિદ્યાર્થીનો ડેટા સફળતાપૂર્વક ઉમેરાયો!");
+    window.location.href = 'view_data.html';
+}
+
+// View Data Logic (Table માં ડેટા બતાવવા)
+function loadTable() {
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+    const tbody = document.getElementById('studentTableBody');
+    tbody.innerHTML = '';
+
+    if(students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">કોઈ ડેટા નથી.</td></tr>';
         return;
     }
 
-    let students = JSON.parse(localStorage.getItem('studentDB')) || [];
-    students.push({ name: name, roll: roll, marks: marks });
-    localStorage.setItem('studentDB', JSON.stringify(students));
-    
-    speak("Data encrypted and saved successfully.");
-    alert("✅ Data Saved!");
-    window.location.href = "view_data.html";
+    students.forEach((stu, index) => {
+        let row = `<tr>
+            <td>${stu.roll}</td>
+            <td><strong>${stu.name}</strong></td>
+            <td>${stu.faculty}</td>
+            <td>${stu.sem}</td>
+            <td>${stu.dob}</td>
+            <td>${stu.mobile}</td>
+            <td>${stu.address}</td>
+            <td><button class="btn btn-danger" style="padding: 5px 10px; font-size:12px;" onclick="deleteStudent(${index})">Delete</button></td>
+        </tr>`;
+        tbody.innerHTML += row;
+    });
 }
 
-function loadStudents() {
-    let students = JSON.parse(localStorage.getItem('studentDB')) || [];
-    let table = document.getElementById('studentTable');
-    
-    if(table) {
-        students.forEach((s, index) => {
-            let row = table.insertRow();
-            row.innerHTML = `<td>${index + 1}</td><td>${s.name}</td><td>${s.roll}</td><td>${s.marks}</td>`;
-        });
+// Delete Logic
+function deleteStudent(index) {
+    if(confirm("શું તમે ખરેખર આ ડેટા ડિલીટ કરવા માંગો છો?")) {
+        let students = JSON.parse(localStorage.getItem('students')) || [];
+        students.splice(index, 1);
+        localStorage.setItem('students', JSON.stringify(students));
+        loadTable(); // ટેબલ રિફ્રેશ કરો
     }
+}
+
+// Dashboard Counts
+function updateDashboard() {
+    let students = JSON.parse(localStorage.getItem('students')) || [];
+    document.getElementById('totalCount').innerText = students.length;
 }
