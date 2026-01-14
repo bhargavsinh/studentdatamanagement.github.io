@@ -1,44 +1,55 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - SDMS</title>
+    <title>Dashboard | SDMS</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="checkAuth(); updateDashboard();">
-
+<body onload="checkAuth()">
     <header>
-        <div class="logo-area">
-            <img src="Untitled (30).png" class="logo-img" alt="Logo">
-            <h3>Mahisagar BCA College</h3>
+        <div class="brand">
+            <img src="Untitled (30).png" alt="Logo">
+            <h2>Mahisagar College</h2>
         </div>
         <nav>
-            <a href="#" onclick="logout()">Logout</a>
+            <a href="dashboard.html" style="color:var(--primary);">Dashboard</a>
+            <a href="view_data.html">Students</a>
+            <a href="contact.html">Support</a>
+            <a href="#" onclick="doLogout()" style="color: var(--danger);">Logout</a>
         </nav>
     </header>
 
     <div class="container">
-        <h1>Dashboard</h1>
-        <p>Welcome to Student Data Management System</p>
+        <div class="page-header">
+            <div class="page-title">Welcome Admin 👋</div>
+            <div style="color: #666;">Manage your college data efficiently</div>
+        </div>
 
-        <div class="dash-grid">
-            <div class="card">
-                <h3>Total Students</h3>
-                <h1 id="totalCount" style="font-size: 4rem; color: var(--primary);">0</h1>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Students</div>
+                <div class="stat-number" id="totalCount">Loading...</div>
+                <a href="view_data.html" class="btn btn-primary">View List</a>
             </div>
-            <div class="card">
-                <h3>Quick Action</h3>
-                <br>
-                <a href="add_student.html" class="btn btn-primary">Add New Student</a>
+            
+            <div class="stat-card" style="border-color: var(--success);">
+                <div class="stat-label">Quick Action</div>
+                <div class="stat-number" style="color: var(--success);">+</div>
+                <a href="add_student.html" class="btn btn-primary" style="background: var(--success);">Add Student</a>
             </div>
-            <div class="card">
-                <h3>View Records</h3>
-                <br>
-                <a href="view_data.html" class="btn btn-primary">View All Data</a>
+
+            <div class="stat-card" style="border-color: #FFA502;">
+                <div class="stat-label">System Support</div>
+                <div class="stat-number" style="color: #FFA502;">?</div>
+                <a href="contact.html" class="btn btn-primary" style="background: #FFA502;">Help Desk</a>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
+    <script>
+        // Simple script to show count on dashboard
+        let data = JSON.parse(localStorage.getItem('students')) || [];
+        document.getElementById('totalCount').innerText = data.length;
+    </script>
 </body>
 </html>
