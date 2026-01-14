@@ -1,81 +1,79 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Student - SDMS</title>
+    <title>Add Student | SDMS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="checkAuth()">
-
     <header>
-        <div class="logo-area">
-            <img src="Untitled (30).png" class="logo-img" alt="Logo">
-            <h3>SDMS</h3>
+        <div class="brand">
+            <img src="Untitled (30).png" alt="Logo">
+            <h2>SDMS</h2>
         </div>
         <nav>
             <a href="dashboard.html">Dashboard</a>
-            <a href="view_data.html">View Data</a>
-            <a href="#" onclick="logout()">Logout</a>
+            <a href="view_data.html">Students</a>
+            <a href="#" onclick="doLogout()">Logout</a>
         </nav>
     </header>
 
     <div class="container">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>Add New Student</h2>
+        <div class="page-header">
+            <div class="page-title">Add New Student</div>
             <a href="dashboard.html" class="btn btn-danger">Cancel</a>
         </div>
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 
-        <form onsubmit="addStudentData(event)">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Full Name:</label>
-                    <input type="text" id="name" placeholder="Enter Full Name" required>
+        <div class="card">
+            <form onsubmit="addStudent(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="name" placeholder="Enter student name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Roll Number</label>
+                        <input type="number" id="roll" placeholder="Ex. 101" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Faculty / Course</label>
+                        <select id="faculty" required>
+                            <option value="BCA">BCA (Computer App.)</option>
+                            <option value="BBA">BBA (Management)</option>
+                            <option value="BCom">BCom (Commerce)</option>
+                            <option value="BSc">BSc (Science)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <select id="sem" required>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10 Digit Number" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Residential Address</label>
+                        <textarea id="address" rows="3" placeholder="Enter full address details..." required></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Roll No:</label>
-                    <input type="number" id="roll" placeholder="Ex. 101" required>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button type="submit" class="btn btn-primary">Save Student Data</button>
                 </div>
-
-                <div class="form-group">
-                    <label>Faculty:</label>
-                    <select id="faculty" required>
-                        <option value="BCA">BCA</option>
-                        <option value="BBA">BBA</option>
-                        <option value="BCom">BCom</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Semester:</label>
-                    <select id="sem" required>
-                        <option value="1">Sem 1</option>
-                        <option value="2">Sem 2</option>
-                        <option value="3">Sem 3</option>
-                        <option value="4">Sem 4</option>
-                        <option value="5">Sem 5</option>
-                        <option value="6">Sem 6</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Birthdate:</label>
-                    <input type="date" id="dob" required>
-                </div>
-                <div class="form-group">
-                    <label>Mobile No:</label>
-                    <input type="tel" id="mobile" placeholder="10 digit number" pattern="[0-9]{10}" required>
-                </div>
-
-                <div class="form-group full-width">
-                    <label>Address:</label>
-                    <textarea id="address" rows="3" placeholder="Enter full address" required></textarea>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Save Student Data</button>
-        </form>
+            </form>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
