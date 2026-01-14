@@ -1,43 +1,61 @@
-/* Google Fonts Import */
+/* Google Fonts Import (તમારો મનપસંદ ફોન્ટ) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root {
-    --primary: #6C63FF; /* Modern Purple */
-    --primary-dark: #5a52d5;
-    --secondary: #2F2E41;
-    --light: #F9FAFB;
+    /* Royal & Modern Tech Palette */
+    --primary: #0A192F;       /* Royal Navy Blue - મુખ્ય રંગ (પ્રોફેશનલ) */
+    --primary-light: #112240; /* લાઈટ નેવી - કાર્ડ્સ અને હોવર માટે */
+    --accent: #D4AF37;        /* Metallic Gold - હાઇલાઇટ (વારસાનું પ્રતીક) */
+    --accent-hover: #B5952F;  /* ડાર્ક ગોલ્ડ */
+    
+    /* Text & Backgrounds */
+    --secondary: #1F2937;     /* ડાર્ક ગ્રે ટેક્સ્ટ */
+    --light: #F4F4F4;         /* ઓફ-વ્હાઈટ બેકગ્રાઉન્ડ (આંખને શાંતિ આપે તેવું) */
     --white: #ffffff;
-    --danger: #FF6584;
-    --success: #00B894;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    
+    /* Functional Colors */
+    --danger: #E63946;        /* Red for errors */
+    --success: #2A9D8F;       /* Teal/Green for success */
+    
+    /* Effects */
+    --shadow: 0 10px 30px rgba(10, 25, 47, 0.15); /* નેવી બ્લુ શેડો */
     --border-radius: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-body { background-color: var(--light); color: var(--secondary); display: flex; flex-direction: column; min-height: 100vh; }
+body { 
+    background-color: var(--light); 
+    color: var(--secondary); 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+}
 
 /* --- Header & Nav --- */
 header {
-    background: var(--white);
+    background: var(--primary); /* હેડર હવે નેવી બ્લુ રહેશે */
     padding: 1rem 5%;
     display: flex; justify-content: space-between; align-items: center;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
     position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--accent); /* નીચે ગોલ્ડન બોર્ડર */
 }
 
 .brand { display: flex; align-items: center; gap: 12px; }
-.brand img { height: 45px; width: auto; }
-.brand h2 { font-size: 1.5rem; color: var(--primary); font-weight: 600; }
+.brand img { height: 45px; width: auto; border-radius: 50%; border: 2px solid var(--accent); }
+.brand h2 { font-size: 1.5rem; color: var(--white); font-weight: 600; letter-spacing: 0.5px; }
 
 nav a {
-    text-decoration: none; color: var(--secondary); margin-left: 25px; font-weight: 500;
+    text-decoration: none; color: #cbd5e1; /* લાઈટ ગ્રે ટેક્સ્ટ */
+    margin-left: 25px; font-weight: 500;
     transition: 0.3s; position: relative;
 }
-nav a:hover { color: var(--primary); }
+nav a:hover { color: var(--accent); } /* હોવર કરવાથી ગોલ્ડન થશે */
+
 nav a::after {
     content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
-    background-color: var(--primary); transition: 0.3s;
+    background-color: var(--accent); transition: 0.3s;
 }
 nav a:hover::after { width: 100%; }
 
@@ -50,58 +68,91 @@ nav a:hover::after { width: 100%; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-.page-title { font-size: 1.8rem; font-weight: 600; color: var(--secondary); }
+.page-title { font-size: 1.8rem; font-weight: 600; color: var(--primary); border-left: 5px solid var(--accent); padding-left: 15px; }
 
 /* --- Buttons --- */
 .btn {
     padding: 10px 24px; border-radius: 8px; border: none; font-size: 14px; font-weight: 500;
     cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: 0.5px;
 }
-.btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3); }
-.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+/* Primary Button: Royal Navy Background with Gold Text styling */
+.btn-primary { 
+    background: var(--primary); 
+    color: var(--white); 
+    border: 1px solid var(--primary);
+    box-shadow: 0 4px 15px rgba(10, 25, 47, 0.2); 
+}
+.btn-primary:hover { 
+    background: var(--accent); /* હોવર પર ગોલ્ડન બેકગ્રાઉન્ડ */
+    color: var(--primary);     /* અને નેવી ટેક્સ્ટ - ખુબ સરસ કોન્ટ્રાસ્ટ */
+    border-color: var(--accent);
+    transform: translateY(-2px); 
+    font-weight: 600;
+}
+
 .btn-danger { background: var(--danger); color: white; }
-.btn-danger:hover { background: #e04a69; }
+.btn-danger:hover { background: #c53030; }
 
 /* --- Forms --- */
-.card { background: var(--white); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow); }
+.card { 
+    background: var(--white); 
+    padding: 30px; 
+    border-radius: var(--border-radius); 
+    box-shadow: var(--shadow); 
+    border-top: 4px solid var(--primary); /* કાર્ડની ઉપર નેવી લાઈન */
+}
 
 .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .form-group { margin-bottom: 5px; }
 .form-group.full { grid-column: span 2; }
 
-label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; color: #666; }
+label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; color: var(--primary); }
 input, select, textarea {
     width: 100%; padding: 12px 15px; border: 1px solid #e1e1e1; border-radius: 8px;
     font-size: 14px; transition: 0.3s; background: #fafafa;
 }
-input:focus, select:focus, textarea:focus { border-color: var(--primary); outline: none; background: #fff; box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1); }
+input:focus, select:focus, textarea:focus { 
+    border-color: var(--accent); /* સિલેક્ટ કરવાથી ગોલ્ડન બોર્ડર */
+    outline: none; 
+    background: #fff; 
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15); 
+}
 
 /* --- Table --- */
 .table-container { overflow-x: auto; background: var(--white); border-radius: var(--border-radius); box-shadow: var(--shadow); }
 table { width: 100%; border-collapse: collapse; min-width: 800px; }
 th, td { padding: 16px 20px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-th { background: #f8f9fa; color: #555; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
-tr:hover { background-color: #f8f9ff; }
-td { font-size: 14px; color: #444; }
+th { 
+    background: var(--primary); /* ટેબલ હેડર નેવી બ્લુ */
+    color: var(--accent);       /* હેડર ટેક્સ્ટ ગોલ્ડન */
+    font-weight: 500; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; 
+}
+tr:hover { background-color: #fdfdfd; }
+td { font-size: 14px; color: #444; font-weight: 400; }
 
 /* --- Dashboard Cards --- */
 .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
 .stat-card {
     background: var(--white); padding: 25px; border-radius: var(--border-radius);
     box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; text-align: center;
-    transition: 0.3s; border-top: 4px solid var(--primary);
+    transition: 0.3s; 
+    border-top: 4px solid var(--accent); /* ગોલ્ડન ટોપ બોર્ડર */
 }
-.stat-card:hover { transform: translateY(-5px); }
+.stat-card:hover { transform: translateY(-5px); border-top-color: var(--primary); }
 .stat-number { font-size: 3rem; font-weight: 700; color: var(--primary); margin: 10px 0; }
 .stat-label { font-size: 1.1rem; color: #777; font-weight: 500; }
 
 /* --- Login Page Specific --- */
 .login-wrap {
     height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    /* Royal Navy Gradient */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
 }
 .login-box {
     background: var(--white); padding: 40px; width: 100%; max-width: 400px;
-    border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); text-align: center;
+    border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 .login-box img { width: 80px; margin-bottom: 20px; }
