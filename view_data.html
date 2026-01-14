@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Data - SDMS</title>
+    <title>All Students | SDMS</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="checkAuth(); loadTable();">
-
+<body onload="checkAuth(); loadStudents();">
     <header>
-        <div class="logo-area">
-            <img src="Untitled (30).png" class="logo-img" alt="Logo">
-            <h3>SDMS</h3>
+        <div class="brand">
+            <img src="Untitled (30).png" alt="Logo">
+            <h2>SDMS</h2>
         </div>
         <nav>
             <a href="dashboard.html">Dashboard</a>
-            <a href="add_student.html">Add Student</a>
-            <a href="#" onclick="logout()">Logout</a>
+            <a href="view_data.html" style="color:var(--primary);">Students</a>
+            <a href="#" onclick="doLogout()">Logout</a>
         </nav>
     </header>
 
     <div class="container" style="max-width: 1200px;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>Student Records</h2>
+        <div class="page-header">
+            <div>
+                <div class="page-title">Student Records</div>
+                <span id="totalCount" style="color: #666; font-size: 14px;">0 Records</span>
+            </div>
             <a href="add_student.html" class="btn btn-primary">+ Add New</a>
         </div>
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 
-        <div class="table-wrapper">
+        <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>Roll No</th>
-                        <th>Name</th>
+                        <th>Student Name</th>
                         <th>Faculty</th>
                         <th>Sem</th>
                         <th>Birthdate</th>
                         <th>Mobile</th>
                         <th>Address</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="studentTableBody">
+                <tbody id="tableBody">
                     </tbody>
             </table>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
