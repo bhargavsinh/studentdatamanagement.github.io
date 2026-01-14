@@ -1,36 +1,34 @@
-// Check Login Status (Login Page સિવાયના બધા પેજ માટે)
+// Auth Check (Login વગર અંદર ન જવા દે)
 function checkAuth() {
-    const user = localStorage.getItem('username');
-    if (!user && !window.location.href.includes('index.html')) {
+    if (!localStorage.getItem('user_login') && !window.location.href.includes('index.html')) {
         window.location.href = 'index.html';
     }
 }
 
-// Login Logic
-function login() {
-    const u = document.getElementById('user').value;
-    const p = document.getElementById('pass').value;
+// Login
+function doLogin(e) {
+    e.preventDefault();
+    const u = document.getElementById('u').value;
+    const p = document.getElementById('p').value;
     if (u === "admin" && p === "1234") {
-        localStorage.setItem('username', 'admin');
+        localStorage.setItem('user_login', 'true');
         window.location.href = 'dashboard.html';
     } else {
-        alert("ખોટું યુઝરનેમ અથવા પાસવર્ડ!");
+        alert("Invalid Username or Password!");
     }
 }
 
-// Logout Logic
-function logout() {
-    localStorage.removeItem('username');
+// Logout
+function doLogout() {
+    localStorage.removeItem('user_login');
     window.location.href = 'index.html';
 }
 
-// Add Student Logic
-function addStudentData(event) {
-    event.preventDefault(); // ફોર્મ સબમિટ થતા રોકો
-    
-    // ડેટા ભેગો કરો
+// Add Student
+function addStudent(e) {
+    e.preventDefault();
     const student = {
-        id: Date.now(), // Unique ID
+        id: Date.now(),
         name: document.getElementById('name').value,
         faculty: document.getElementById('faculty').value,
         sem: document.getElementById('sem').value,
@@ -40,53 +38,85 @@ function addStudentData(event) {
         address: document.getElementById('address').value
     };
 
-    // જૂનો ડેટા લાવો અને નવો ઉમેરો
-    let students = JSON.parse(localStorage.getItem('students')) || [];
-    students.push(student);
-    localStorage.setItem('students', JSON.stringify(students));
-
-    alert("વિદ્યાર્થીનો ડેટા સફળતાપૂર્વક ઉમેરાયો!");
+    let data = JSON.parse(localStorage.getItem('students')) || [];
+    data.push(student);
+    localStorage.setItem('students', JSON.stringify(data));
+    
+    alert('Student Added Successfully!');
     window.location.href = 'view_data.html';
 }
 
-// View Data Logic (Table માં ડેટા બતાવવા)
-function loadTable() {
-    let students = JSON.parse(localStorage.getItem('students')) || [];
-    const tbody = document.getElementById('studentTableBody');
+// View Students
+function loadStudents() {
+    let data = JSON.parse(localStorage.getItem('students')) || [];
+    const tbody = document.getElementById('tableBody');
+    document.getElementById('totalCount').innerText = data.length + " Records";
+
     tbody.innerHTML = '';
-
-    if(students.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">કોઈ ડેટા નથી.</td></tr>';
-        return;
-    }
-
-    students.forEach((stu, index) => {
-        let row = `<tr>
-            <td>${stu.roll}</td>
-            <td><strong>${stu.name}</strong></td>
-            <td>${stu.faculty}</td>
-            <td>${stu.sem}</td>
-            <td>${stu.dob}</td>
-            <td>${stu.mobile}</td>
-            <td>${stu.address}</td>
-            <td><button class="btn btn-danger" style="padding: 5px 10px; font-size:12px;" onclick="deleteStudent(${index})">Delete</button></td>
-        </tr>`;
-        tbody.innerHTML += row;
+    data.forEach((stu, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${stu.roll}</td>
+                <td><strong>${stu.name}</strong></td>
+                <td>${stu.faculty}</td>
+                <td>Sem-${stu.sem}</td>
+                <td>${stu.dob}</td>
+                <td>${stu.mobile}</td>
+                <td>${stu.address}</td>
+                <td>
+                    <a href="edit_student.html?id=${index}" class="btn btn-primary" style="padding: 6px 12px; font-size: 12px;">Edit</a>
+                    <button onclick="deleteStudent(${index})" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px;">Del</button>
+                </td>
+            </tr>
+        `;
     });
 }
 
-// Delete Logic
+// Delete
 function deleteStudent(index) {
-    if(confirm("શું તમે ખરેખર આ ડેટા ડિલીટ કરવા માંગો છો?")) {
-        let students = JSON.parse(localStorage.getItem('students')) || [];
-        students.splice(index, 1);
-        localStorage.setItem('students', JSON.stringify(students));
-        loadTable(); // ટેબલ રિફ્રેશ કરો
+    if(confirm('Are you sure you want to delete this record?')) {
+        let data = JSON.parse(localStorage.getItem('students')) || [];
+        data.splice(index, 1);
+        localStorage.setItem('students', JSON.stringify(data));
+        loadStudents();
     }
 }
 
-// Dashboard Counts
-function updateDashboard() {
-    let students = JSON.parse(localStorage.getItem('students')) || [];
-    document.getElementById('totalCount').innerText = students.length;
+// Load Data for Edit
+function loadEdit() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    let data = JSON.parse(localStorage.getItem('students')) || [];
+    
+    if(data[id]) {
+        document.getElementById('idx').value = id;
+        document.getElementById('name').value = data[id].name;
+        document.getElementById('faculty').value = data[id].faculty;
+        document.getElementById('sem').value = data[id].sem;
+        document.getElementById('roll').value = data[id].roll;
+        document.getElementById('dob').value = data[id].dob;
+        document.getElementById('mobile').value = data[id].mobile;
+        document.getElementById('address').value = data[id].address;
+    }
+}
+
+// Update Student
+function updateStudent(e) {
+    e.preventDefault();
+    const id = document.getElementById('idx').value;
+    let data = JSON.parse(localStorage.getItem('students')) || [];
+    
+    data[id] = {
+        name: document.getElementById('name').value,
+        faculty: document.getElementById('faculty').value,
+        sem: document.getElementById('sem').value,
+        roll: document.getElementById('roll').value,
+        dob: document.getElementById('dob').value,
+        mobile: document.getElementById('mobile').value,
+        address: document.getElementById('address').value
+    };
+
+    localStorage.setItem('students', JSON.stringify(data));
+    alert('Data Updated!');
+    window.location.href = 'view_data.html';
 }
