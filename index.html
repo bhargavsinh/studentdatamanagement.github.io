@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SDMS</title>
+    <title>Login | SDMS</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="login-body">
-
-    <div class="login-card">
-        <img src="Untitled (30).png" alt="Logo">
-        <h2>Admin Login</h2>
-        <p style="color:#666; margin-bottom: 20px;">BCA Sem-1 Project</p>
-        
-        <form onsubmit="event.preventDefault(); login();">
-            <div class="form-group">
-                <input type="text" id="user" placeholder="Username (admin)" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="pass" placeholder="Password (1234)" required>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-        </form>
+<body>
+    <div class="login-wrap">
+        <div class="login-box">
+            <img src="Untitled (30).png" alt="Logo">
+            <h2 style="margin-bottom: 10px;">Admin Login</h2>
+            <p style="color: #888; margin-bottom: 30px;">Student Data Management System</p>
+            
+            <form onsubmit="doLogin(event)">
+                <div class="form-group">
+                    <input type="text" id="u" placeholder="Username (admin)" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="p" placeholder="Password (1234)" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">Secure Login</button>
+            </form>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
